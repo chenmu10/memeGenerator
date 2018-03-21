@@ -16,6 +16,7 @@ function resetgMeme(imgId) {
                 align: 'left',
                 color: 'red',
                 fontFamily: 'Segoe UI',
+                shadow: false,
                 coord: { x: 150, y: 70 }
             },
             {
@@ -24,6 +25,7 @@ function resetgMeme(imgId) {
                 align: 'left',
                 color: 'red',
                 fontFamily: 'Segoe UI',
+                shadow: false,
                 coord: { x: 150, y: 300 }
             }
         ]
@@ -33,7 +35,6 @@ function resetgMeme(imgId) {
 function initImgCanvas(imgId) {
     toggleView();
     resetgMeme(imgId);
-
 
     var canvas = document.getElementById('memeCanvas');
     gCtx = canvas.getContext('2d');
@@ -61,6 +62,15 @@ function drawCanvas() {
         gCtx.font = line.size + 'px' + ' ' + line.fontFamily;
         gCtx.fillStyle = line.color;
         gCtx.textAlign = line.align;
+        if (line.shadow) {
+            gCtx.shadowOffsetX = 3;
+            gCtx.shadowOffsetY = 3;
+            gCtx.shadowColor = "rgba(0,0,0,0.3)";
+        } else {
+            gCtx.shadowOffsetX = 0;
+            gCtx.shadowOffsetY = 0;
+        }
+     
         gCtx.fillText(line.line, line.coord.x, line.coord.y);
     });
 
@@ -87,10 +97,11 @@ function editTxt(elinput, lineNum) {
 
     if (elinput.type === 'select-one') {
         gMeme.txts[txtIdx][property] = elinput.options[elinput.selectedIndex].value;
+    } else if (elinput.type === 'checkbox') {
+        gMeme.txts[txtIdx][property] = elinput.checked;
     } else {
         gMeme.txts[txtIdx][property] = elinput.value;
-    }
-
+    } 
 
     drawCanvas();
 }
@@ -108,7 +119,7 @@ function dlCanvas(eldllink) {
     dt = dt.replace(/^data:application\/octet-stream/, 'data:application/octet-stream;headers=Content-Disposition%3A%20attachment%3B%20filename=Canvas.png');
 
     eldllink.href = dt;
-};
+}
 
 function toggleView() {
     document.querySelector('.meme-container').classList.toggle('hidden');
