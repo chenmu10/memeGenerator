@@ -22,31 +22,43 @@
 
             </section>
 
-            <section class="meme-container">
+            <section class="meme-container hidden">
                 <canvas id="memeCanvas">
                     Your browser does not support the HTML5 canvas tag.
                 </canvas>
 
-                <button>Back to gallery</button>
+                <button onclick="toggleView()">Back to gallery</button>
                 <div>
-                    <input type="text" name="line" placeholder="add text" size="30" oninput="editTxt(this,1)">
-                    <input type="number" value="30" step="2" name="size" oninput="editTxt(this,1)">
-                    <select>
-                        <option value="arial">Arial</option>
-                        <option value="arial">font</option>
-                        <option value="arial">font</option>
-                        <option value="arial">font</option>
+                    <input type="text" id="line" placeholder="Line 1" size="30" oninput="editTxt(this,1)">
+                    <input type="number" value="30" step="2" id="size" oninput="editTxt(this,1)">
+                    <select id="fontFamily" oninput="editTxt(this,1)">
+                        <option value="Segoe UI">Segoe UI</option>
+                        <option value="Tahoma">Tahoma</option>
+                        <option value="Geneva">Geneva</option>
+                        <option value="Verdana">Verdana</option>
                     </select>
+                    <select id="align" oninput="editTxt(this,1)">
+                            <option value="left">left</option>
+                            <option value="center">center</option>
+                            <option value="right">right</option>
+                    </select>
+                    <input type="color" value="#ff0000" id="color" oninput="editTxt(this,1)">
                 </div>
                 <div>
-                    <input type="text" name="line" placeholder="add text" size="30" oninput="editTxt(this,2)">
-                    <input type="number" value="30" step="2" name="size" oninput="editTxt(this,2)">
-                    <select>
-                        <option value="arial">Arial</option>
-                        <option value="arial">font</option>
-                        <option value="arial">font</option>
-                        <option value="arial">font</option>
+                    <input type="text" id="line" placeholder="Line 2" size="30" oninput="editTxt(this,2)">
+                    <input type="number" value="30" step="2" id="size" oninput="editTxt(this,2)">
+                    <select id="fontFamily" oninput="editTxt(this,2)">
+                        <option value="Segoe UI">Segoe UI</option>
+                            <option value="Tahoma">Tahoma</option>
+                            <option value="Geneva">Geneva</option>
+                            <option value="Verdana">Verdana</option>
                     </select>
+                    <select id="align" oninput="editTxt(this,2)">
+                            <option value="left">left</option>
+                            <option value="center">center</option>
+                            <option value="right">right</option>
+                    </select>
+                    <input type="color" value="#ff0000" id="color" oninput="editTxt(this,2)">
                 </div>
 
                 <div>
