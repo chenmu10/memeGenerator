@@ -1,0 +1,181 @@
+/*-------Fonts---------*/
+
+@font-face {
+    font-family: 'FontAwesome';
+    src: url('../fonts/font-awesome/fontawesome-webfont.ttf');
+    font-weight: normal;
+    font-style: normal;
+}
+
+.fa {
+    font-family: 'FontAwesome';
+}
+  
+
+/*---playfair---*/
+
+@font-face {
+    font-family: playfairRegular;
+    src: url('../fonts/Playfair_Display/PlayfairDisplay-Regular.ttf');
+}
+@font-face {
+    font-family: playfairBold;
+    src: url('../fonts/Playfair_Display/PlayfairDisplay-Bold.ttf');
+}
+@font-face {
+    font-family: playfairItalic;
+    src: url('../fonts/Playfair_Display/PlayfairDisplay-Italic.ttf');
+}
+/*---Inconsolata---*/
+
+@font-face {
+    font-family: inconsolata;
+    src: url('../fonts/Inconsolata/Inconsolata-Regular.ttf');
+}
+/*---Ubuntu---*/
+
+@font-face {
+    font-family: ubuntu;
+    src: url('../fonts/Ubuntu/Ubuntu-Light.ttf');
+}
+
+
+/*=============================================
+=            Global            =
+=============================================*/
+
+
+* {
+    box-sizing: border-box;
+}
+
+img {
+    width: 100%;
+    height: auto;
+}
+
+html {
+    font-family: 'playfairRegular', serif;
+    color: #626262;
+    font-size: 14px;
+}
+
+body {
+    margin: 0;
+}
+
+a {
+    text-decoration: none;
+}
+
+
+/*=====  End of Global  ======*/
+
+
+
+/*-------Layout-----*/
+
+.container {
+    max-width: 1060px;
+    width: 90%;
+    margin: 0 auto;
+}
+
+/*-------header-----*/
+
+header {
+    height: 160px; 
+    background-color: black;
+}
+
+
+/*----Main------*/
+
+
+
+/*----------  Gallery  ----------*/
+.grid-container {
+    display: grid;
+    grid-template-columns: auto auto auto;
+    grid-gap: 10px;
+    
+    padding: 10px;
+  }
+  .grid-container > div {
+   cursor: pointer;
+  }
+
+
+
+
+/*----------  contact  ----------*/
+
+/*----Footer----*/
+
+footer {
+    height: 160px; 
+    background-color: black;
+}
+
+
+
+/*=============================================
+=            Helpers            =
+=============================================*/
+
+/* vertically centering everything: */
+.vertical-center-flex {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.clean-list {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+.clean-btn {
+    border: none;
+    background: transparent;
+    padding: 0;
+}
+
+/*=====  End of Helpers  ======*/
+
+
+
+/*---flex---*/
+
+.flex {
+    display: flex;
+}
+.inline-flex {
+    display: inline-flex;
+}
+
+.justify-center {
+    justify-content: center;
+}
+
+.align-center {
+    align-items: center;
+}
+
+.space-around {
+    justify-content: space-around;
+}
+.space-between {
+    justify-content: space-between;
+}
+
+.flex-wrap {
+    flex-wrap: wrap;
+}
+
+.flex-full {
+    flex: 1;
+}
+
+
