@@ -1,56 +1,82 @@
 'use strict';
 
 
-// gMeme - the current image on canvas
+
 var gMeme = {
     selectedImgId: null,
     txts: [
         {
-            line: 'I never eat Falafel',
+            line: 'Line 1',
             size: 20,
             align: 'left',
-            color: 'red'
+            color: 'red',
+            fontFamily: 'ariel',
+            coord: { x: 150, y: 70 }
+        },
+        {
+            line: 'Line 2',
+            size: 20,
+            align: 'left',
+            color: 'red',
+            fontFamily: 'ariel',
+            coord: { x: 150, y: 300 }
         }
     ]
-}
-
-
+};
 var gCtx;
-function sendToCanvas(imgId, elImg) {
-    gMeme.selectedImgId= imgId;
+var gImgObj;
+
+function initImgCanvas(imgId) {
     var canvas;
+    gMeme.selectedImgId = imgId;
 
     canvas = document.getElementById('myCanvas');
     gCtx = canvas.getContext('2d');
 
-    var imageObj = new Image();
-    imageObj.onload = function () {
-        canvas.width = imageObj.width;
-        canvas.height = imageObj.height;
-        drawImage(this);
+    gImgObj = new Image();
+    gImgObj.onload = function () {
+        canvas.width = gImgObj.width;
+        canvas.height = gImgObj.height;
+        drawCanvas();
     };
 
-    var imgIdx  = gImgs.findIndex(function (img) {
+    var imgIdx = gImgs.findIndex(function (img) {
         return imgId === img.id;
-    })
-    
-    imageObj.src = gImgs[imgIdx].url;
+    });
+
+    gImgObj.src = gImgs[imgIdx].url;
+}
+
+function drawCanvas() {
+    drawImg(gImgObj);
+
+    gMeme.txts.forEach(line => {
+        gCtx.font = line.size + 'px' + ' ' + gMeme.txts.fontFamily;
+        gCtx.fillStyle = line.color;
+        gCtx.textAlign = line.align;
+        gCtx.fillText(line.line, line.coord.x,  line.coord.y);
+    });
+  
 }
 
 
-function drawImage(imageObj) {
+function drawImg(imageObj) {
     var x = 0;
     var y = 0;
 
     gCtx.drawImage(imageObj, x, y);
 
     var imageData = gCtx.getImageData(x, y, imageObj.width, imageObj.height);
-    var data = imageData.data;
 
     // overwrite original image
     gCtx.putImageData(imageData, x, y);
 }
 
 
-// ctx.font = "30px Arial";
-// ctx.strokeText("line1",10,50);
+
+function changeTxt(eltxt, lineNum) {
+    var txtIdx = lineNum - 1;
+    
+    gMeme.txts[txtIdx].line=eltxt.value;
+    drawCanvas();
+}

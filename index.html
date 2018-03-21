@@ -23,12 +23,32 @@
             </section>
 
             <section class="meme-container">
-                <canvas id="myCanvas" width="200" height="200" style="border:1px solid #d3d3d3;">
-                    Your browser does not support the HTML5 canvas tag.</canvas>
+                <canvas id="myCanvas" width="200" height="200">
+                    Your browser does not support the HTML5 canvas tag.
+                </canvas>
+
+                <div>
+                    <input type="text" name="line" placeholder="add text" size="30" oninput="changeTxt(this,1)">
+                    <input type="number" value="12" step="2" name="fontSize">
+                    <select>
+                        <option value="arial">Arial</option>
+                        <option value="arial">font</option>
+                        <option value="arial">font</option>
+                        <option value="arial">font</option>
+                    </select>
+                </div>
+                <div>
+                    <input type="text" name="line" placeholder="add text" size="30" oninput="changeTxt(this,2)">
+                </div>
+
+                <div>
+                    <button>Save to computer</button>
+                </div>
+
             </section>
 
             <section class="contact">
-               
+
             </section>
         </div>
     </main>
