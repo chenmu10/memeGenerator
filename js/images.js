@@ -9,15 +9,15 @@ var gNextId = 1;
 var gImgs;
 
 function init() {
-   gImgs= createImgs();
-   renderImgs(gImgs);
+    gImgs = createImgs();
+    renderImgs(gImgs);
 }
 
 function createImgs() {
     var imgs = [];
 
-    imgs.push(createImage('../img/Oprah-You-Get-A.jpg', ['happy']));
-    imgs.push(createImage('../img/X-Everywhere.jpg', ['sad']));
+    imgs.push(createImage('../img/Oprah-You-Get-A.jpg', ['happy']),
+        createImage('../img/X-Everywhere.jpg', ['sad']));
 
     return imgs;
 }
@@ -35,9 +35,8 @@ function renderImgs(imgs) {
         return `
         <div class="img"><img id='${img.id}' src='${img.url}' onclick="initImgCanvas(${img.id},this)" alt='meme picture'/></div>
         `
-    });
+    })
+    .join(' ')
 
-    document.querySelector('.gallery').innerHTML= strHtml.join('');
-  
-
+    document.querySelector('.gallery').innerHTML = strHtml;
 }

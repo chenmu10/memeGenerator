@@ -5,6 +5,8 @@
 var gMeme;
 var gCtx;
 var gImgObj;
+var UP_ARROW='▲';
+var DOWN_ARROW='▼';
 
 function resetgMeme(imgId) {
     gMeme = {
@@ -12,18 +14,18 @@ function resetgMeme(imgId) {
         txts: [
             {
                 line: 'Line 1',
-                size: 30,
+                size: 40,
                 align: 'left',
-                color: 'red',
+                color: '#000000',
                 fontFamily: 'Segoe UI',
                 shadow: false,
                 coord: { x: 150, y: 70 }
             },
             {
                 line: 'Line 2',
-                size: 30,
+                size: 40,
                 align: 'left',
-                color: 'red',
+                color: '#000000',
                 fontFamily: 'Segoe UI',
                 shadow: false,
                 coord: { x: 150, y: 300 }
@@ -35,6 +37,7 @@ function resetgMeme(imgId) {
 function initImgCanvas(imgId) {
     toggleView();
     resetgMeme(imgId);
+    renderLines();
 
     var canvas = document.getElementById('memeCanvas');
     gCtx = canvas.getContext('2d');
@@ -58,21 +61,27 @@ function initImgCanvas(imgId) {
 function drawCanvas() {
     drawImg(gImgObj);
 
-    gMeme.txts.forEach(line => {
-        gCtx.font = line.size + 'px' + ' ' + line.fontFamily;
-        gCtx.fillStyle = line.color;
-        gCtx.textAlign = line.align;
-        if (line.shadow) {
-            gCtx.shadowOffsetX = 3;
-            gCtx.shadowOffsetY = 3;
-            gCtx.shadowColor = "rgba(0,0,0,0.3)";
-        } else {
-            gCtx.shadowOffsetX = 0;
-            gCtx.shadowOffsetY = 0;
-        }
-     
-        gCtx.fillText(line.line, line.coord.x, line.coord.y);
+    gMeme.txts.forEach(txt => {
+        gCtx.font = txt.size + 'px' + ' ' + txt.fontFamily;
+        gCtx.fillStyle = txt.color;
+        gCtx.textAlign = txt.align;
+        toggleShadow(txt);
+
+        gCtx.fillText(txt.line, txt.coord.x, txt.coord.y);
     });
+
+}
+
+function toggleShadow(txt) {
+
+    if (txt.shadow) {
+        gCtx.shadowOffsetX = 3;
+        gCtx.shadowOffsetY = 3;
+        gCtx.shadowColor = "rgba(0,0,0,0.3)";
+    } else {
+        gCtx.shadowOffsetX = 0;
+        gCtx.shadowOffsetY = 0;
+    }
 
 }
 
@@ -90,9 +99,11 @@ function drawImg(imageObj) {
 }
 
 
+// function editTxt(value, lineNum , property) {
+//     gMeme.txts[lineNum][property] = value;
+// }
+function editTxt(elinput, txtIdx) {
 
-function editTxt(elinput, lineNum) {
-    var txtIdx = lineNum - 1;
     var property = elinput.id;
 
     if (elinput.type === 'select-one') {
@@ -101,10 +112,16 @@ function editTxt(elinput, lineNum) {
         gMeme.txts[txtIdx][property] = elinput.checked;
     } else {
         gMeme.txts[txtIdx][property] = elinput.value;
-    } 
+    }
 
     drawCanvas();
 }
+
+// function moveX(txtIdx, direction) {
+//     gMeme.txts[txtIdx].coord.y = (direction==='UP') ? gMeme.txts[txtIdx].coord.y +=10 :  gMeme.txts[txtIdx].coord.y -=10;
+   
+//     drawCanvas();
+// }
 
 
 /* REGISTER DOWNLOAD HANDLER */
@@ -124,4 +141,35 @@ function dlCanvas(eldllink) {
 function toggleView() {
     document.querySelector('.meme-container').classList.toggle('hidden');
     document.querySelector('.gallery').classList.toggle('hidden');
+}
+
+function renderLines() {
+    var strHtml = gMeme.txts.map(function (txt, idx) {
+        return `
+        <div>
+                    <input type="text" id="line" placeholder="${txt.line}"  oninput="editTxt(this,${idx})">
+                    <button onclick="moveX(${idx},'UP')">${UP_ARROW}</button>
+                    <button onclick="moveX(${idx},'DOWN')">${DOWN_ARROW}</button>
+                    <input type="number" value="${txt.size}" step="2" id="size" oninput="editTxt(this ,${idx})">
+                    <select id="fontFamily" oninput="editTxt(this,${idx})">
+                        <option value="${txt.fontFamily}">Segoe UI</option>
+                        <option value="Tahoma">Tahoma</option>
+                        <option value="Geneva">Geneva</option>
+                        <option value="Verdana">Verdana</option>
+                    </select>
+                    <select id="align" oninput="editTxt(this,${idx})">
+                            <option value="left">left</option>
+                            <option value="center">center</option>
+                            <option value="right">right</option>
+                    </select>
+                    <input type="color" value="${txt.color}" id="color" oninput="editTxt(this,${idx})">
+                    <input type="checkbox" id="shadow" name="shadow" value="shadow" onclick="editTxt(this,${idx})">
+                    <label for="shadow">shadow</label>
+                   
+                </div>
+        `
+    })
+        .join(' ');
+
+    document.querySelector('.lines-list').innerHTML = strHtml;
 }

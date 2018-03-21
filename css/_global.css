@@ -10,7 +10,7 @@
 .fa {
     font-family: 'FontAwesome';
 }
-  
+
 
 /*---playfair---*/
 
@@ -18,20 +18,26 @@
     font-family: playfairRegular;
     src: url('../fonts/Playfair_Display/PlayfairDisplay-Regular.ttf');
 }
+
 @font-face {
     font-family: playfairBold;
     src: url('../fonts/Playfair_Display/PlayfairDisplay-Bold.ttf');
 }
+
 @font-face {
     font-family: playfairItalic;
     src: url('../fonts/Playfair_Display/PlayfairDisplay-Italic.ttf');
 }
+
+
 /*---Inconsolata---*/
 
 @font-face {
     font-family: inconsolata;
     src: url('../fonts/Inconsolata/Inconsolata-Regular.ttf');
 }
+
+
 /*---Ubuntu---*/
 
 @font-face {
@@ -43,7 +49,6 @@
 /*=============================================
 =            Global            =
 =============================================*/
-
 
 * {
     box-sizing: border-box;
@@ -68,10 +73,46 @@ a {
     text-decoration: none;
 }
 
-
+button {
+    display: inline-block;
+    border-radius: 4px;
+    background-color: #f4511e;
+    border: none;
+    color: #FFFFFF;
+    text-align: center;
+    font-size: 1.1em;
+    padding: 5px;
+    transition: all 0.3s;
+    cursor: pointer;
+    
+  }
+  
+  button span {
+    cursor: pointer;
+    display: inline-block;
+    position: relative;
+    transition: 0.3s;
+  }
+  
+  button span:after {
+    content: '\00bb';
+    position: absolute;
+    opacity: 0;
+    top: 0;
+    right: -20px;
+    transition: 0.3s;
+  }
+  
+  button:hover span {
+    padding-right: 10px;
+  }
+  
+  button:hover span:after {
+    opacity: 1;
+    right: 0;
+  }
 
 /*=====  End of Global  ======*/
-
 
 
 /*-------Layout-----*/
@@ -82,10 +123,11 @@ a {
     margin: 0 auto;
 }
 
+
 /*-------header-----*/
 
 header {
-    height: 160px; 
+    height: 100px;
     background-color: black;
 }
 
@@ -93,42 +135,67 @@ header {
 /*----Main------*/
 
 
-
 /*----------  Gallery  ----------*/
+
 .grid-container {
     display: grid;
     grid-template-columns: auto auto auto;
     grid-gap: 10px;
-    
     padding: 10px;
-  }
-  .grid-container > div {
-   cursor: pointer;
-  }
+}
+
+.grid-container>div>img {
+    cursor: pointer;
+    background: #fff;
+    border-radius: 2px;
+    display: inline-block;
+    margin: 1rem;
+    position: relative;
+    width: 100%;
+}
+
+.grid-container>div>img:hover {
+    box-shadow: 0 19px 38px rgba(0, 0, 0, 0.30), 0 15px 12px rgba(0, 0, 0, 0.22);
+}
 
 
+/*=============================================
+=            Meme Container            =
+=============================================*/
+
+#memeCanvas {
+    margin: 50px;
+}
+
+input {
+    margin: 5px;
+}
+
+/*=====  End of Meme Container  ======*/
 
 
 /*----------  contact  ----------*/
 
+
 /*----Footer----*/
 
 footer {
-    height: 160px; 
+    height: 160px;
     background-color: black;
 }
-
 
 
 /*=============================================
 =            Helpers            =
 =============================================*/
 
+
 /* vertically centering everything: */
+
 .vertical-center-flex {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .clean-list {
@@ -147,8 +214,8 @@ footer {
     display: none;
 }
 
-/*=====  End of Helpers  ======*/
 
+/*=====  End of Helpers  ======*/
 
 
 /*---flex---*/
@@ -156,6 +223,7 @@ footer {
 .flex {
     display: flex;
 }
+
 .inline-flex {
     display: inline-flex;
 }
@@ -171,6 +239,7 @@ footer {
 .space-around {
     justify-content: space-around;
 }
+
 .space-between {
     justify-content: space-between;
 }
@@ -182,5 +251,3 @@ footer {
 .flex-full {
     flex: 1;
 }
-
-

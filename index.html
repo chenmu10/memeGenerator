@@ -11,7 +11,7 @@
 
 <body onload="init()">
     <header>
-        <div class="container">
+        <div class="container vertical-center-flex">
             <h1>Meme Generator</h1>
         </div>
 
@@ -19,7 +19,7 @@
     <main>
         <div class="container">
             <section class="gallery grid-container">
-
+                <!-- js render -->
             </section>
 
             <section class="meme-container hidden">
@@ -27,47 +27,15 @@
                     Your browser does not support the HTML5 canvas tag.
                 </canvas>
 
-                <button onclick="toggleView()">Back to gallery</button>
-                <div>
-                    <input type="text" id="line" placeholder="Line 1" size="30" oninput="editTxt(this,1)">
-                    <input type="number" value="30" step="2" id="size" oninput="editTxt(this,1)">
-                    <select id="fontFamily" oninput="editTxt(this,1)">
-                        <option value="Segoe UI">Segoe UI</option>
-                        <option value="Tahoma">Tahoma</option>
-                        <option value="Geneva">Geneva</option>
-                        <option value="Verdana">Verdana</option>
-                    </select>
-                    <select id="align" oninput="editTxt(this,1)">
-                            <option value="left">left</option>
-                            <option value="center">center</option>
-                            <option value="right">right</option>
-                    </select>
-                    <input type="color" value="#ff0000" id="color" oninput="editTxt(this,1)">
-                    <input type="checkbox" id="shadow" name="shadow" value="shadow" onclick="editTxt(this,1)">
-                    <label for="shadow">shadow</label>
-                </div>
-                <div>
-                    <input type="text" id="line" placeholder="Line 2" size="30" oninput="editTxt(this,2)">
-                    <input type="number" value="30" step="2" id="size" oninput="editTxt(this,2)">
-                    <select id="fontFamily" oninput="editTxt(this,2)">
-                        <option value="Segoe UI">Segoe UI</option>
-                            <option value="Tahoma">Tahoma</option>
-                            <option value="Geneva">Geneva</option>
-                            <option value="Verdana">Verdana</option>
-                    </select>
-                    <select id="align" oninput="editTxt(this,2)">
-                            <option value="left">left</option>
-                            <option value="center">center</option>
-                            <option value="right">right</option>
-                    </select>
-                    <input type="color" value="#ff0000" id="color" oninput="editTxt(this,2)">
-                    <input type="checkbox" id="shadow" name="shadow" value="shadow" onclick="editTxt(this,2)">
-                    <label for="shadow">shadow</label>
+                <button onclick="toggleView()"><span>Back to gallery </span></button>
+                <div class="lines-list">
+                    <!-- js render -->
+                    
                 </div>
 
                 <div>
-                        <a id="dl" download="meme.png" href="#" onclick="dlCanvas(this)">Download Image</a>
-                   
+                    <a id="dl" download="meme.png" href="#" onclick="dlCanvas(this)"><span>Download Image </span></a>
+
                 </div>
 
             </section>
