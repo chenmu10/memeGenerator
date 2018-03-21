@@ -23,13 +23,14 @@
             </section>
 
             <section class="meme-container">
-                <canvas id="myCanvas" width="200" height="200">
+                <canvas id="memeCanvas">
                     Your browser does not support the HTML5 canvas tag.
                 </canvas>
 
+                <button>Back to gallery</button>
                 <div>
-                    <input type="text" name="line" placeholder="add text" size="30" oninput="changeTxt(this,1)">
-                    <input type="number" value="12" step="2" name="fontSize">
+                    <input type="text" name="line" placeholder="add text" size="30" oninput="editTxt(this,1)">
+                    <input type="number" value="30" step="2" name="size" oninput="editTxt(this,1)">
                     <select>
                         <option value="arial">Arial</option>
                         <option value="arial">font</option>
@@ -38,11 +39,19 @@
                     </select>
                 </div>
                 <div>
-                    <input type="text" name="line" placeholder="add text" size="30" oninput="changeTxt(this,2)">
+                    <input type="text" name="line" placeholder="add text" size="30" oninput="editTxt(this,2)">
+                    <input type="number" value="30" step="2" name="size" oninput="editTxt(this,2)">
+                    <select>
+                        <option value="arial">Arial</option>
+                        <option value="arial">font</option>
+                        <option value="arial">font</option>
+                        <option value="arial">font</option>
+                    </select>
                 </div>
 
                 <div>
-                    <button>Save to computer</button>
+                        <a id="dl" download="meme.png" href="#" onclick="dlCanvas(this)">Download Image</a>
+                   
                 </div>
 
             </section>

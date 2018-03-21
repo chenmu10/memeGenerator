@@ -7,18 +7,18 @@ var gMeme = {
     txts: [
         {
             line: 'Line 1',
-            size: 20,
+            size: 30,
             align: 'left',
             color: 'red',
-            fontFamily: 'ariel',
+            fontFamily: 'Segoe UI',
             coord: { x: 150, y: 70 }
         },
         {
             line: 'Line 2',
-            size: 20,
+            size: 30,
             align: 'left',
             color: 'red',
-            fontFamily: 'ariel',
+            fontFamily: 'Segoe UI',
             coord: { x: 150, y: 300 }
         }
     ]
@@ -27,16 +27,18 @@ var gCtx;
 var gImgObj;
 
 function initImgCanvas(imgId) {
-    var canvas;
     gMeme.selectedImgId = imgId;
-
-    canvas = document.getElementById('myCanvas');
+    
+    
+    var canvas= document.getElementById('memeCanvas');
     gCtx = canvas.getContext('2d');
 
     gImgObj = new Image();
     gImgObj.onload = function () {
         canvas.width = gImgObj.width;
         canvas.height = gImgObj.height;
+        gMeme.txts[1].coord.y = gImgObj.height-70;
+
         drawCanvas();
     };
 
@@ -51,12 +53,12 @@ function drawCanvas() {
     drawImg(gImgObj);
 
     gMeme.txts.forEach(line => {
-        gCtx.font = line.size + 'px' + ' ' + gMeme.txts.fontFamily;
+        gCtx.font = line.size + 'px' + ' ' + line.fontFamily;
         gCtx.fillStyle = line.color;
         gCtx.textAlign = line.align;
-        gCtx.fillText(line.line, line.coord.x,  line.coord.y);
+        gCtx.fillText(line.line, line.coord.x, line.coord.y);
     });
-  
+
 }
 
 
@@ -74,9 +76,25 @@ function drawImg(imageObj) {
 
 
 
-function changeTxt(eltxt, lineNum) {
+function editTxt(eltxt, lineNum) {
     var txtIdx = lineNum - 1;
-    
-    gMeme.txts[txtIdx].line=eltxt.value;
+    var property = eltxt.name;  
+
+    gMeme.txts[txtIdx][property] = eltxt.value;
     drawCanvas();
 }
+
+
+/* REGISTER DOWNLOAD HANDLER */
+   function dlCanvas(eldllink) {
+    var canvas = document.getElementById('memeCanvas');
+  
+    var dt = canvas.toDataURL('image/png');
+    /* Change MIME type to trick the browser to downlaod the file instead of displaying it */
+    dt = dt.replace(/^data:image\/[^;]*/, 'data:application/octet-stream');
+  
+    /* In addition to <a>'s "download" attribute, you can define HTTP-style headers */
+    dt = dt.replace(/^data:application\/octet-stream/, 'data:application/octet-stream;headers=Content-Disposition%3A%20attachment%3B%20filename=Canvas.png');
+  
+    eldllink.href = dt;
+  };
