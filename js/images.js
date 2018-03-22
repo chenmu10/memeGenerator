@@ -17,6 +17,8 @@ function createImgs() {
     var imgs = [];
 
     imgs.push(createImage('../img/Oprah-You-Get-A.jpg', ['happy']),
+        createImage('../img/Oprah-You-Get-A.jpg', ['happy']),
+        createImage('../img/Oprah-You-Get-A.jpg', ['happy']),
         createImage('../img/X-Everywhere.jpg', ['sad']));
 
     return imgs;
@@ -33,10 +35,10 @@ function createImage(url, keywords) {
 function renderImgs(imgs) {
     var strHtml = imgs.map(function (img, idx) {
         return `
-        <div class="img"><img id='${img.id}' src='${img.url}' onclick="initImgCanvas(${img.id},this)" alt='meme picture'/></div>
+        <img id='${img.id}' src='${img.url}' onclick="initCanvas(${img.id},this)" alt='meme picture'/>
         `
     })
-    .join(' ')
+        .join(' ')
 
     document.querySelector('.gallery').innerHTML = strHtml;
 }

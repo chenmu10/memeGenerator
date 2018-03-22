@@ -1,0 +1,46 @@
+/*-------Fonts---------*/
+
+@font-face {
+    font-family: 'FontAwesome';
+    src: url('../fonts/font-awesome/fontawesome-webfont.ttf');
+    font-weight: normal;
+    font-style: normal;
+}
+
+.fa {
+    font-family: 'FontAwesome';
+}
+
+
+/*---playfair---*/
+
+@font-face {
+    font-family: playfairRegular;
+    src: url('../fonts/Playfair_Display/PlayfairDisplay-Regular.ttf');
+}
+
+@font-face {
+    font-family: playfairBold;
+    src: url('../fonts/Playfair_Display/PlayfairDisplay-Bold.ttf');
+}
+
+@font-face {
+    font-family: playfairItalic;
+    src: url('../fonts/Playfair_Display/PlayfairDisplay-Italic.ttf');
+}
+
+
+/*---Inconsolata---*/
+
+@font-face {
+    font-family: inconsolata;
+    src: url('../fonts/Inconsolata/Inconsolata-Regular.ttf');
+}
+
+
+/*---Ubuntu---*/
+
+@font-face {
+    font-family: ubuntu;
+    src: url('../fonts/Ubuntu/Ubuntu-Light.ttf');
+}
