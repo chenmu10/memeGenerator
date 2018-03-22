@@ -1,0 +1,120 @@
+
+
+
+
+/*-------Layout-----*/
+
+.container {
+    max-width: 1060px;
+    width: 90%;
+    margin: 0 auto;
+}
+
+main {
+    min-height: calc(100vh - 70px);
+}
+
+/*-------header-----*/
+
+header {
+    height: 100px;
+    background-color: black;
+}
+
+header h1 {
+    color: rgb(248, 247, 247);
+    /* -webkit-text-stroke: 1px rgb(248, 81, 81); */
+    /* text-shadow: 1px 1px rgb(248, 81, 81); */
+    /* letter-spacing: 2px; */
+    font-size: 3em;
+    font-family: impact, 'dodisRegular', 'Courier New', Courier, monospace;
+}
+
+
+/*----Main------*/
+
+
+/*----------  Gallery  ----------*/
+
+.grid-container {
+    display: grid;
+    /* grid-template-columns - responsive without mediaqueries.
+    200px is the minimum img size.
+    each column is 200px minimum (one pic fit)  will grow to 1fr until screen width size is 400px - then two imgs can fit each 200px size. next breakpoint is 600px - 3 columns can fit. 
+    */
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    /* rows - undefiend, automatically make rows as needed. with auto height-the height of the img in that row.*/
+    grid-gap: 10px;
+    padding: 10px;
+}
+
+.grid-container>img {
+    /* display:block - img is inline by default- makes it have "line-height" applied to the bottom. display block gets rid of that line */
+    display: block;
+    /* width: 100% - img in grid cell will grow width to fit into changing cell size */
+    width: 100%;
+    cursor: pointer;
+    border-radius: 2px;
+
+}
+
+.grid-container>img:hover {
+    box-shadow: 0 19px 38px rgba(0, 0, 0, 0.30), 0 15px 12px rgba(0, 0, 0, 0.22);
+    /* box-shadow: 0 0 10px 6px rgba(0, 140, 186, 0.5); */
+}
+
+
+/*=============================================
+=            Meme Container            =
+=============================================*/
+
+.meme-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 20px 0;
+}
+
+.meme-control {
+    display: flex;
+    align-items: center;
+}
+
+.txt-editor {
+    padding: 10px;
+    border: 1px #f4511e solid;
+    border-radius: 25px;
+}
+
+.memeCanvas {
+    border: 2px solid white;
+    border-radius: 2px;
+    margin: 5px;
+    box-shadow: 0 19px 38px rgba(0, 0, 0, 0.30), 0 15px 12px rgba(0, 0, 0, 0.22);
+}
+
+input[type=text] {
+    padding: 5px;
+    border: 2px solid #ccc;
+    -webkit-border-radius: 2px;
+    border-radius: 2px;
+}
+
+input[type=number] {
+    width: 45px;
+}
+
+
+
+/*=====  End of Meme Container  ======*/
+
+
+/*----------  contact  ----------*/
+
+
+/*----Footer----*/
+
+footer {
+    height: 50px;
+    background-color: black;
+}

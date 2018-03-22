@@ -44,3 +44,10 @@
     font-family: ubuntu;
     src: url('../fonts/Ubuntu/Ubuntu-Light.ttf');
 }
+
+/*---Dodis---*/
+
+@font-face {
+    font-family: dodisRegular;
+    src: url('../fonts/dodis/Dodis-Regular.ttf');
+}

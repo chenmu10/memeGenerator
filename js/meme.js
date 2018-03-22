@@ -1,16 +1,13 @@
 'use strict';
 
-
-
 var gMeme;
 var gCtx;
 var gImgObj;
 
-function resetgMeme(imgId) {
-
-    gMeme = {
+function createGmeme(imgId) {
+    return {
         selectedImgId: imgId,
-        txts: [createTxt('line 1', 150, 70), createTxt('line 2', 150, 300)]
+        txts: [createTxt('Your Text', 150, 70), createTxt('Your Text', 150, 300)]
     };
 }
 
@@ -35,15 +32,21 @@ function createTxt(line, x, y) {
     };
 }
 
-function initCanvas(imgId) {
+function initMemeEditor(imgId) {
     toggleView();
-    resetgMeme(imgId);
-    renderTxtsPanel();
+    gMeme = createGmeme(imgId);
+    initCanvas();
+    renderTxtsEditor();
+}
 
-    var canvas = document.getElementById('memeCanvas');
+function initCanvas() {
+
+    var canvas = document.querySelector('.memeCanvas');
     gCtx = canvas.getContext('2d');
 
     gImgObj = new Image();
+    gImgObj.src = getImgSrc();
+
     gImgObj.onload = function () {
         canvas.width = gImgObj.width;
         canvas.height = gImgObj.height;
@@ -52,17 +55,22 @@ function initCanvas(imgId) {
         drawCanvas();
     };
 
+
+}
+
+function getImgSrc() {
+    // imgIdx needed to find img src url in gImg[]
     var imgIdx = gImgs.findIndex(function (img) {
-        return imgId === img.id;
+        return gMeme.selectedImgId === img.id;
     });
 
-    gImgObj.src = gImgs[imgIdx].url;
+    return gImgs[imgIdx].url;
 }
 
 function drawCanvas() {
-    drawImg(gImgObj);
+    gCtx.drawImage(gImgObj, 0, 0);
 
-    gMeme.txts.forEach(txt => {
+    gMeme.txts.forEach(function (txt) {
         drawTxt(txt);
     });
 
@@ -90,21 +98,6 @@ function addTxtOutline(txt) {
     gCtx.lineWidth = txt.lineWidth;
     gCtx.strokeText(txt.line, txt.x, txt.y);
 }
-
-
-function drawImg(imageObj) {
-    var x = 0;
-    var y = 0;
-
-    gCtx.drawImage(imageObj, x, y);
-
-    var imageData = gCtx.getImageData(x, y, imageObj.width, imageObj.height);
-
-    // overwrite original image
-    gCtx.putImageData(imageData, x, y);
-}
-
-
 
 /**
  * editTxt() gets changes for txt and update gMeme model.
@@ -137,38 +130,16 @@ function editTxt(elinput, txtIdx) {
 }
 
 
-
-/* REGISTER DOWNLOAD HANDLER */
-function dlCanvas(eldllink) {
-    var canvas = document.getElementById('memeCanvas');
-
-    var dt = canvas.toDataURL('image/png');
-    /* Change MIME type to trick the browser to downlaod the file instead of displaying it */
-    dt = dt.replace(/^data:image\/[^;]*/, 'data:application/octet-stream');
-
-    /* In addition to <a>'s "download" attribute, you can define HTTP-style headers */
-    dt = dt.replace(/^data:application\/octet-stream/, 'data:application/octet-stream;headers=Content-Disposition%3A%20attachment%3B%20filename=meme.png');
-
-    eldllink.href = dt;
-}
-
-function toggleView() {
-    document.querySelector('.meme-container').classList.toggle('hidden');
-    document.querySelector('.gallery').classList.toggle('hidden');
-}
-
-
-function renderTxtsPanel() {
+function renderTxtsEditor() {
     var strHtml = gMeme.txts.map(function (txt, idx) {
         return `
-        <div>
-                    <fieldset>
-                    <legend><h2>Line ${idx + 1}</h2></legend>
-                    <button onclick="deleteTxt(${idx})">Delete Line</button>
+        <div class="txt-editor">
+                   
                     <p>
-                    Text: <input type="text" data-property="line" placeholder="${txt.line}" oninput="editTxt(this,${idx})">
-                    Size: <input type="number" value="${txt.size}"  min="10" step="2" data-property="size" oninput="editTxt(this ,${idx})">
-                    Color: <input type="color" value="${txt.color}" data-property="color" oninput="editTxt(this,${idx})">
+                    <button onclick="deleteTxt(${idx})"><i class="fas fa-eraser"></i></button>
+                    <input type="text" data-property="line" placeholder="${txt.line}" oninput="editTxt(this,${idx})">
+                    <i class="fas fa-text-height"></i> <input type="range" value="${txt.size}"  min="10" step="2" data-property="size" oninput="editTxt(this ,${idx})">
+                    <input type="color" value="${txt.color}" data-property="color" oninput="editTxt(this,${idx})">
                     Family: 
                     <select data-property="fontFamily" oninput="editTxt(this,${idx})">
                     <option value="${txt.fontFamily}">${txt.fontFamily}</option>
@@ -179,9 +150,8 @@ function renderTxtsPanel() {
                     </p>
 
                     <p>
-                    <h3>Location</h3>
-                    X: <input type="number" value="${txt.x}"  min="0" step="5" data-property="x" oninput="editTxt(this ,${idx})">
-                    Y: <input type="number" value="${txt.y}"  min="0" step="5" data-property="y" oninput="editTxt(this ,${idx})">
+                    <i class="fas fa-arrows-alt-h"></i> <input type="number" value="${txt.x}"  min="0" step="5" data-property="x" oninput="editTxt(this ,${idx})">
+                    <i class="fas fa-arrows-alt-v"></i> <input type="number" value="${txt.y}"  min="0" step="5" data-property="y" oninput="editTxt(this ,${idx})">
 
                     <select data-property="align" oninput="editTxt(this,${idx})">
                     <option value="left">left</option>
@@ -191,39 +161,58 @@ function renderTxtsPanel() {
                     </p>
 
                     <p>
-                   
                     <input id="outline" type="checkbox" data-property="isOutline" checked onclick="editTxt(this,${idx})">
-                    <label for="outline"> Outline</label> <br>
+                    <label for="outline">Outline</label>
                     Width: <input type="number" value="${txt.lineWidth}"  min="0" step="1" data-property="lineWidth" oninput="editTxt(this ,${idx})">
-                    Color: <input type="color" value="${txt.strokeStyle}" data-property="strokeStyle" oninput="editTxt(this,${idx})">
+                    <input type="color" value="${txt.strokeStyle}" data-property="strokeStyle" oninput="editTxt(this,${idx})">
                     </p>
                     <p>
                     
                     <input id="shadow" type="checkbox" data-property="isShadow" onclick="editTxt(this,${idx})">
-                    <label for="shadow">Shadow</label><br>
-                    Color: <input type="color" value="${txt.shadowColor}" data-property="shadowColor" oninput="editTxt(this,${idx})">
-                    X: <input type="number" value="${txt.shadowOffsetX}"  step="1" data-property="shadowOffsetX" oninput="editTxt(this ,${idx})">
-                    Y: <input type="number" value="${txt.shadowOffsetY}"  step="1" data-property="shadowOffsetY" oninput="editTxt(this ,${idx})">
+                    <label for="shadow">Shadow</label>
+                    <input type="color" value="${txt.shadowColor}" data-property="shadowColor" oninput="editTxt(this,${idx})">
+                    <i class="fas fa-arrows-alt-h"></i> <input type="number" value="${txt.shadowOffsetX}"  step="1" data-property="shadowOffsetX" oninput="editTxt(this ,${idx})">
+                    <i class="fas fa-arrows-alt-v"></i><input type="number" value="${txt.shadowOffsetY}"  step="1" data-property="shadowOffsetY" oninput="editTxt(this ,${idx})">
                     Blur: <input type="number" value="${txt.shadowBlur}" data-property="shadowBlur" oninput="editTxt(this,${idx})">
                     </p>
-                  </fieldset>
+                 
                 </div>
         `
     })
         .join(' ');
 
-    document.querySelector('.lines-list').innerHTML = strHtml;
+    document.querySelector('.txts-list').innerHTML = strHtml;
 
 }
 
 function newTxtBtnClicked() {
     gMeme.txts.push(createTxt('New Line', 150, 150));
     drawCanvas();
-    renderTxtsPanel();
+    renderTxtsEditor();
 }
 
 function deleteTxt(txtIdx) {
     gMeme.txts.splice(txtIdx, 1); //arr.splice(start, deleteCount)
     drawCanvas();
-    renderTxtsPanel();
+    renderTxtsEditor();
+}
+
+
+/* REGISTER DOWNLOAD HANDLER */
+function dlCanvas(eldllink) {
+    var canvas = document.querySelector('.memeCanvas');
+
+    var dt = canvas.toDataURL('image/png');
+    /* Change MIME type to trick the browser to downlaod the file instead of displaying it */
+    dt = dt.replace(/^data:image\/[^;]*/, 'data:application/octet-stream');
+
+    /* In addition to <a>'s "download" attribute, you can define HTTP-style headers */
+    dt = dt.replace(/^data:application\/octet-stream/, 'data:application/octet-stream;headers=Content-Disposition%3A%20attachment%3B%20filename=canvas.png');
+
+    eldllink.href = dt;
+}
+
+function toggleView() {
+    document.querySelector('.meme-container').classList.toggle('hidden');
+    document.querySelector('.gallery').classList.toggle('hidden');
 }

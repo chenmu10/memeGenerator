@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Meme Generator</title>
+    <script defer src="../fonts/fontawesome-all.js"></script>
     <link rel="stylesheet" href="css/style.css">
 </head>
 
@@ -17,27 +18,33 @@
 
     </header>
     <main>
-        <div class="container">
+        <div>
             <section class="gallery grid-container">
                 <!-- js render -->
             </section>
 
             <section class="meme-container hidden">
-                <canvas id="memeCanvas">
-                    Your browser does not support the HTML5 canvas tag.
-                </canvas>
+                <button onclick="toggleView()">
+                        <i class="fas fa-times"></i>
+                </button>
 
-                <button onclick="toggleView()"><span>Back to gallery </span></button>
-                <div class="lines-list">
-                    <!-- js render -->
-                    
+                <div class="meme-control">
+                        <canvas class="memeCanvas">
+                                Your browser does not support the HTML5 canvas tag.
+                            </canvas>
+            
+                            <div class="txts-list">
+                                <!-- js render -->
+                            </div>
                 </div>
+              
 
                 <div>
-                    <button onclick="newTxtBtnClicked()">Add Line</button>
-                    <a id="dl" download="meme.png" href="#" onclick="dlCanvas(this)"><span>Download Image </span></a>
+                    <button onclick="newTxtBtnClicked()"><i class="fas fa-plus"></i></button>
+                    <a id="dl" download="meme.png" href="#" onclick="dlCanvas(this)">
+                        <span><i class="fas fa-cloud-download-alt"></i></span>
+                    </a>
                 </div>
-
             </section>
 
             <section class="contact">
