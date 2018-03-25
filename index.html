@@ -25,26 +25,28 @@
 
             <section class="meme-container hidden">
                 <button onclick="toggleView()">
-                        <i class="fas fa-times"></i>
+                    <i class="fas fa-times"></i> Back to Gallery
                 </button>
 
                 <div class="meme-control">
-                        <canvas class="memeCanvas">
-                                Your browser does not support the HTML5 canvas tag.
-                            </canvas>
-            
-                            <div class="txts-list">
-                                <!-- js render -->
-                            </div>
-                </div>
-              
+                    <canvas class="memeCanvas">
+                        Your browser does not support the HTML5 canvas tag.
+                    </canvas>
 
-                <div>
-                    <button onclick="newTxtBtnClicked()"><i class="fas fa-plus"></i></button>
-                    <a id="dl" download="meme.png" href="#" onclick="dlCanvas(this)">
-                        <span><i class="fas fa-cloud-download-alt"></i></span>
-                    </a>
+                    <div class="txts-list">
+                        <!-- js render -->
+                    </div>
                 </div>
+
+                <button onclick="newTxtBtnClicked()">
+                    <i class="fas fa-plus"></i>  Add Line
+                </button>
+                <a id="dl" download="meme.png" href="#" onclick="dlCanvas(this)">
+                    <span>
+                        <i class="fas fa-cloud-download-alt"></i> Download
+                    </span>
+                </a>
+
             </section>
 
             <section class="contact">

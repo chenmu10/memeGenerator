@@ -1,6 +1,6 @@
 @import 'fonts.css';
 
 @import 'global.css';
-/* @import '_desktop.css' (min-width: 940px); */
+@import 'desktop.css' (min-width: 940px);
 
 
