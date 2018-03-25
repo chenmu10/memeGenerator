@@ -54,17 +54,18 @@ main {
 /*-------header-----*/
 
 header {
-    height: 100px;
     background-color: black;
+    /* display: flex;
+    justify-content: flex-start; */
+    text-align: center;
 }
 
 header h1 {
+    margin: 0;
+    padding: 10px;
     color: rgb(248, 247, 247);
-    /* -webkit-text-stroke: 1px rgb(248, 81, 81); */
-    /* text-shadow: 1px 1px rgb(248, 81, 81); */
-    /* letter-spacing: 2px; */
     font-size: 3em;
-    font-family: impact, 'dodisRegular', 'Courier New', Courier, monospace;
+    font-family: impact, 'Segoe UI', 'Courier New', Courier, monospace;
 }
 
 
