@@ -16,12 +16,13 @@ function init() {
 function createImgs() {
     var imgs = [];
 
-    imgs.push(createImage('./img/Oprah-You-Get-A.jpg', ['happy']),
-        createImage('./img/One-Does-Not-Simply.jpg', ['fun']),
-        createImage('./img/Ancient-Aliens.jpg', ['happy']),
-        createImage('./img/Batman-Slapping-Robin.jpg', ['happy']),
-        createImage('./img/Mocking-Spongebob.jpg', ['happy']),
-        createImage('./img/X-Everywhere.jpg', ['sad']));
+   imgs.push(createImage('./img/gallery/Oprah-You-Get-A.jpg', ['happy']),
+        createImage('./img/gallery/One-Does-Not-Simply.jpg', ['fun']),
+        createImage('./img/gallery/Ancient-Aliens.jpg', ['happy']),
+        createImage('./img/gallery/Batman-Slapping-Robin.jpg', ['happy']),
+        createImage('./img/gallery/Mocking-Spongebob.jpg', ['happy']),
+         createImage('./img/gallery/success.jpg', ['happy']),
+        createImage('./img/gallery/X-Everywhere.jpg', ['sad']));
 
     return imgs;
 }
